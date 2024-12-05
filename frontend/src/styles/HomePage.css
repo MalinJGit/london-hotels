@@ -1,0 +1,27 @@
+.homepage {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .homepage-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .homepage-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+  }
+  
+  @media (min-width: 768px) {
+    .homepage-main {
+      flex-direction: row;
+    }
+  }
+  
