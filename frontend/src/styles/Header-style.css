@@ -1,0 +1,19 @@
+.homepage-header {
+  background-color: #f8f8f8; /* Sätt bakgrundsfärg för headern */
+  padding: 20px; /* Lägg till padding för att ge utrymme runt innehållet */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrerar innehållet horisontellt */
+  text-align: center; /* Centrerar texten */
+}
+
+.header-images {
+  display: flex;
+  gap: 10px; /* Lägg till mellanrum mellan bilderna */
+}
+
+.header-image {
+  width: 300px; /* Justera storleken på bilderna */
+  height: auto;
+  border-radius: 8px;
+}

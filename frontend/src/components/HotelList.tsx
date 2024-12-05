@@ -7,7 +7,6 @@ interface Hotel {
     location: string;
     price: number;
     rating: number;
-    imageUrl: string;
 }
 
 interface HotelListProps {

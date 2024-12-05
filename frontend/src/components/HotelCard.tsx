@@ -6,7 +6,6 @@ interface Hotel {
   price: number;
   location: string;
   rating: number;
-  imageUrl: string; // URL till bild
 }
 
 // Props för komponenten
@@ -17,7 +16,6 @@ interface HotelCardProps {
 const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
   return (
     <div className="hotel-card">
-      <img src={hotel.imageUrl} alt={hotel.name} className="hotel-image" />
       <div className="hotel-info">
         <h2>{hotel.name}</h2>
         <p>{hotel.location}</p>
