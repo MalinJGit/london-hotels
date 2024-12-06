@@ -10,10 +10,10 @@ interface Hotel {
 }
 
 interface HotelListProps {
-  hotels: Hotel[];
+  hotels?: Hotel[]; // Gör `hotels` valfritt med `?`
 }
 
-const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
+const HotelList: React.FC<HotelListProps> = ({ hotels = [] }) => { // Använd default till en tom array
   return (
     <div>
       {hotels.length > 0 ? (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 // import AboutPage from './pages/AboutPage';
 // import LoginPage from './pages/LoginPage';
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} /> */}
       </Routes>
+      <Footer />
     </Router>
   );
 };

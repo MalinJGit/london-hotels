@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const fetchHotels = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/hotels'); // Din backend
+      const response = await axios.get('http://localhost:5003/api/hotels'); // Din backend
       console.log('Fetched hotels:', response.data);  // Lägg till denna loggning för att visa datan från backend
       return response.data;  // Returnera datan
     } catch (error) {
