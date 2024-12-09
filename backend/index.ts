@@ -2,7 +2,7 @@ import express from 'express';
 import axios from 'axios';
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5003;
 
 // Middleware för att hantera CORS
 app.use((req, res, next) => {
@@ -12,41 +12,34 @@ app.use((req, res, next) => {
   next();
 });
 
-// API route för att hämta hotell
-app.get('/api/hotels', async (req, res) => {
-  const options = {
-    method: 'GET',
-    url: 'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels',
-    params: {
-      dest_id: '-2092174',  // London ID (hämta via searchDestination om du inte vet det)
-      search_type: 'CITY',  
-      arrival_date: '2024-12-20', 
-      departure_date: '2024-12-25',  
-      adults: '1', 
-      children_age: '0,1,17', 
-      room_qty: '1', 
-      price_min: '50', 
-      price_max: '500', 
-      sort_by: 'PRICE', 
-      units: 'metric',  
-      languagecode: 'en-us', 
-      currency_code: 'USD', 
-    },
-    headers: {
-      'x-rapidapi-key': '5937f4cfa4msh4c57ebaa853f21bp13f60cjsn7f250f843c62',
-      'x-rapidapi-host': 'booking-com15.p.rapidapi.com',
-    }
-  };
+// Konfigurera RapidAPI URL och headers
+const API_URL = 'https://tourist-attraction.p.rapidapi.com/search';
+const API_KEY = '5937f4cfa4msh4c57ebaa853f21bp13f60cjsn7f250f843c62';
 
+// Route för att hämta hotell (eller turistattraktioner)
+app.post('/api/search-hotels', async (req, res) => {
   try {
-    // Skickar förfrågan till API:t
-    const response = await axios.request(options);
-    console.log(response.data);  // Här kan du se resultatet
+    const encodedParams = new URLSearchParams();
+    encodedParams.set('location_id', '45963'); // Sök efter London
+    encodedParams.set('language', 'en_US');
+    encodedParams.set('currency', 'USD');
+    encodedParams.set('offset', '0');
 
-    // Skickar tillbaka svaret till frontend
-    res.json(response.data);
+    const options = {
+      method: 'POST',
+      url: API_URL,
+      headers: {
+        'x-rapidapi-key': API_KEY,
+        'x-rapidapi-host': 'tourist-attraction.p.rapidapi.com',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: encodedParams,
+    };
+
+    const response = await axios.request(options);
+    res.json(response.data); // Skicka datan tillbaka till frontend
   } catch (error) {
-    console.error(error);  // Fångar eventuella fel
+    console.error('Error with API request:', error);
     res.status(500).send('Error fetching hotels');
   }
 });
