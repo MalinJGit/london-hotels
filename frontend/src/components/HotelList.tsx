@@ -1,27 +1,16 @@
 import React from 'react';
-import HotelCard from './HotelCard';
-
-interface Hotel {
-    id: number;
-    name: string;
-    location: string;
-    price: number;
-    rating: number;
-}
 
 interface HotelListProps {
-  hotels?: Hotel[]; // Gör `hotels` valfritt med `?`
+  hotels: any[];
 }
 
-const HotelList: React.FC<HotelListProps> = ({ hotels = [] }) => { // Använd default till en tom array
+const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
   return (
-    <div>
-      {hotels.length > 0 ? (
-        hotels.map((hotel) => <HotelCard key={hotel.id} hotel={hotel} />)
-      ) : (
-        <p>Inga hotell matchar dina filter.</p>
-      )}
-    </div>
+    <ul>
+      {hotels.map((hotel) => (
+        <li key={hotel.id}>{hotel.name}</li>
+      ))}
+    </ul>
   );
 };
 
