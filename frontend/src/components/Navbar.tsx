@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
 
 const styles = {
   navbar: {
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#282c34",
     padding: "1rem",
     borderBottom: "1px solid #ddd",
   },
@@ -43,7 +43,7 @@ const styles = {
   },
   link: {
     textDecoration: "none",
-    color: "#007bff",
+    color: "#white",
     fontWeight: "bold",
   },
 };

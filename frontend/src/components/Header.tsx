@@ -14,19 +14,19 @@ const Header: React.FC<HeaderProps> = ({ image1, image2, image3 }) => {
           className="header-image"
           src={image1}
           alt="Image 1"
-          style={{ width: '455px', height: '300px', objectFit: 'cover' }} // Storlek för bild 1
+          style={{ width: '455px', height: '300px', objectFit: 'cover' }}
         />
         <img
           className="header-image"
           src={image2}
           alt="Image 2"
-          style={{ width: '455px', height: '300px', objectFit: 'cover' }} // Storlek för bild 2
+          style={{ width: '455px', height: '300px', objectFit: 'cover' }}
         />
         <img
           className="header-image"
           src={image3}
           alt="Image 3"
-          style={{ width: '455px', height: '300px', objectFit: 'cover' }} // Storlek för bild 3
+          style={{ width: '455px', height: '300px', objectFit: 'cover' }}
         />
       </div>
     </div>
