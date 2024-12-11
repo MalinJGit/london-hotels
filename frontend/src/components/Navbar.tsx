@@ -1,31 +1,58 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import Login from "../components/Login";
 
 const Navbar: React.FC = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+  };
+
   return (
     <nav style={styles.navbar}>
       <ul style={styles.navList}>
         <li style={styles.navItem}>
-          <Link to="/signup" style={styles.link}>
-            Skapa konto
-          </Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/login" style={styles.link}>
+          <a
+            href="#"
+            style={styles.link}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowLoginModal(true);
+            }}
+          >
             Logga in
-          </Link>
+          </a>
         </li>
         <li style={styles.navItem}>
-          <Link to="/about" style={styles.link}>
+          <a href="/signup" style={styles.link}>
+            Skapa konto
+          </a>
+        </li>
+        <li style={styles.navItem}>
+          <a href="/about" style={styles.link}>
             Om oss
-          </Link>
+          </a>
         </li>
       </ul>
+
+      {showLoginModal && (
+        <div style={styles.modal}>
+          <div style={styles.modalContent}>
+            <button
+              style={styles.closeButton}
+              onClick={() => setShowLoginModal(false)}
+            >
+              &times;
+            </button>
+            <Login onLoginSuccess={handleLoginSuccess} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
   navbar: {
     backgroundColor: "#282c34",
     padding: "1rem",
@@ -43,8 +70,37 @@ const styles = {
   },
   link: {
     textDecoration: "none",
-    color: "#white",
+    color: "white",
     fontWeight: "bold",
+  },
+  modal: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "8px",
+    position: "relative",
+    width: "90%",
+    maxWidth: "400px",
+  },
+  closeButton: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    background: "none",
+    border: "none",
+    fontSize: "20px",
+    cursor: "pointer",
   },
 };
 
