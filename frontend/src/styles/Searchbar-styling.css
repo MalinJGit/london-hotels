@@ -22,14 +22,14 @@
   }
   
   .search-input:focus {
-    border-color: #007bff; /* Blå kant vid fokus */
+    border-color: #282c34; /* Blå kant vid fokus */
   }
   
   .search-button {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff; /* Primär blå färg */
+    background-color: #282c34;
     border: none;
     border-radius: 5px;
     cursor: pointer;
