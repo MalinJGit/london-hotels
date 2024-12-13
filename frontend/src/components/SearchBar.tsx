@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 interface SearchBarProps {
-  onSearch: (query: string) => void; // Funktion som skickar söksträngen tillbaka till föräldrakomponenten
+  onSearch: (query: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    onSearch(searchQuery); // Skicka söksträngen till föräldrakomponenten
+    onSearch(searchQuery);
   };
 
   return (
@@ -18,8 +18,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         placeholder="Sök hotell..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-input"
       />
-      <button onClick={handleSearch}>Sök</button>
+      <button onClick={handleSearch} className="search-button">
+        Sök
+      </button>
     </div>
   );
 };
