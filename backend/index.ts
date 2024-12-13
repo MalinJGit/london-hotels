@@ -13,28 +13,30 @@ app.use((req, res, next) => {
 });
 
 // Konfigurera RapidAPI URL och headers
-const API_URL = 'https://tourist-attraction.p.rapidapi.com/search';
+const API_URL = 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation';
 const API_KEY = '5937f4cfa4msh4c57ebaa853f21bp13f60cjsn7f250f843c62';
 
 // Route för att hämta hotell (eller turistattraktioner)
-app.post('/api/search-hotels', async (req, res) => {
+app.post('/api/search-location', async (req, res) => {
   try {
-    const encodedParams = new URLSearchParams();
-    encodedParams.set('location_id', '45963'); // Sök efter London
-    encodedParams.set('language', 'en_US');
-    encodedParams.set('currency', 'USD');
-    encodedParams.set('offset', '0');
-
     const options = {
-      method: 'POST',
-      url: API_URL,
-      headers: {
-        'x-rapidapi-key': API_KEY,
-        'x-rapidapi-host': 'tourist-attraction.p.rapidapi.com',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      data: encodedParams,
-    };
+        method: 'GET',
+        url: 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation',
+        params: {
+          query: 'London, uk'
+        },
+        headers: {
+          'x-rapidapi-key': '5937f4cfa4msh4c57ebaa853f21bp13f60cjsn7f250f843c62',
+          'x-rapidapi-host': 'tripadvisor16.p.rapidapi.com'
+        }
+      };
+      
+      try {
+          const response = await axios.request(options);
+          console.log(response.data);
+      } catch (error) {
+          console.error(error);
+      }
 
     const response = await axios.request(options);
     res.json(response.data); // Skicka datan tillbaka till frontend
