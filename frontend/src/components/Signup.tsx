@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/LoginForm.css'; // Importera CSS-filen
+import '../styles/SignupForm.css'; // Importera CSS-filen
 
-const LoginForm: React.FC = () => {
+const SignupForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5003/api/login', {
+      const response = await axios.post('http://localhost:5003/api/signup', {
         email,
         password,
       });
       setMessage(response.data.message);
       setError(null);
-      localStorage.setItem('token', response.data.token); // Sparar token
     } catch (error: any) {
       setError(error.response?.data?.message || 'Något gick fel');
       setMessage(null);
@@ -26,9 +25,9 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleLogin}>
-        <h2>Logga In</h2>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSignup}>
+        <h2>Skapa Konto</h2>
         <div>
           <label>Email</label>
           <input
@@ -47,7 +46,7 @@ const LoginForm: React.FC = () => {
             required
           />
         </div>
-        <button type="submit">Logga In</button>
+        <button type="submit">Skapa Konto</button>
         {message && <p className="success">{message}</p>}
         {error && <p className="error">{error}</p>}
       </form>
@@ -55,4 +54,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

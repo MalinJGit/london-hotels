@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Hämta hotell baserat på plats
 export const fetchHotelsByLocation = async (latitude: string, longitude: string, pageNumber: string = '1', currencyCode: string = 'USD') => {
   const options = {
     method: 'GET',
@@ -19,9 +18,9 @@ export const fetchHotelsByLocation = async (latitude: string, longitude: string,
 
   try {
     const response = await axios.request(options);
-    return response.data; // Returnera hotellistans data
+    return response.data;
   } catch (error) {
-    console.error('Error fetching hotels by location:', error);
-    throw error; // Kasta vidare felet så det kan hanteras
+    console.error('Error fetching hotels:', error);
+    throw error;
   }
 };

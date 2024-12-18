@@ -11,6 +11,8 @@ interface Photo {
 interface HotelDetails {
   name: string;
   description: string;
+  address: string;
+  rating: number;
   [key: string]: any; // Lägg till om fler fält används senare
 }
 
@@ -29,25 +31,33 @@ const HotelDetails: React.FC = () => {
 
         // Hämta hotellinformation
         const detailsResponse = await axios.get(
-          `https://booking-com15.p.rapidapi.com/api/v1/hotels/details/${id}`,
+          `https://tripadvisor16.p.rapidapi.com/api/v1/hotels/getHotelDetails`,
           {
             headers: {
-              'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com',
+              'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com',
               'X-RapidAPI-Key': '5937f4cfa4msh4c57ebaa853f21bp13f60cjsn7f250f843c62',
+            },
+            params: {
+              hotelId: id, // Skicka hotellets ID som parameter
             },
           }
         );
+        console.log('Hotel details response:', detailsResponse.data);
 
-        // Hämta bilder
+        // Hämta bilder för hotellet (om den nya API:n erbjuder en separat endpoint för bilder)
         const photosResponse = await axios.get(
-          `https://booking-com15.p.rapidapi.com/api/v1/hotels/photos/${id}`,
+          `https://tripadvisor16.p.rapidapi.com/api/v1/hotels/getHotelPhotos`, // Kontrollera om denna URL krävs för bilder
           {
             headers: {
-              'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com',
+              'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com',
               'X-RapidAPI-Key': '5937f4cfa4msh4c57ebaa853f21bp13f60cjsn7f250f843c62',
+            },
+            params: {
+              hotelId: id, // Skicka hotellets ID
             },
           }
         );
+        console.log('Hotel photos response:', photosResponse.data);
 
         setHotelDetails(detailsResponse.data);
         setPhotos(photosResponse.data?.photos || []);
@@ -74,6 +84,9 @@ const HotelDetails: React.FC = () => {
     <div>
       <h1>{hotelDetails?.name || 'Hotellinformation saknas'}</h1>
       <p>{hotelDetails?.description || 'Ingen beskrivning tillgänglig.'}</p>
+      <p>{hotelDetails?.address || 'Ingen adress tillgänglig.'}</p>
+      <p>Rating: {hotelDetails?.rating || 'Ingen rating tillgänglig.'}</p>
+
       <div>
         <h3>Hotel Photos</h3>
         {photos.length > 0 ? (

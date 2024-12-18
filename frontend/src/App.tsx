@@ -5,8 +5,8 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import HotelDetails from './pages/HotelDetails';
 // import AboutPage from './pages/AboutPage';
-// import LoginPage from './pages/LoginPage';
-// import SignupPage from './pages/SignupPage';
+import Login from './components/Login';
+import SignupForm from './components/Signup';
 
 const App: React.FC = () => {
   return (
@@ -15,9 +15,9 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/hotel/:id" element={<HotelDetails />} />
-        {/* <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} /> */}
+        {/* <Route path="/about" element={<AboutPage />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignupForm />} />
       </Routes>
       <Footer />
     </Router>
