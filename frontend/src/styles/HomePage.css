@@ -1,55 +1,38 @@
-/* .homepage {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  
-  .homepage-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .homepage-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  } */
-  
-  .error-message {
-    color: red;
-    text-align: center;
-  }
 
-  .homepage header {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers content horizontally */
-    justify-content: center; /* Centers content vertically */
-    text-align: center; /* Ensures the text is centered inside the container */
-    padding: 20px;
-    height: 100vh; /* Ensures the content fills the screen height */
-  }
-  
-  .homepage header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .homepage header p {
-    max-width: 800px; /* Optional: sets a maximum width for the paragraph */
-    width: 100%; /* Ensures the paragraph takes the full width of its container */
-    line-height: 1.8;
-    font-size: 18px;
-    margin-bottom: 1.5rem;
-    text-align: center; /* Ensures the text is centered */
-    word-wrap: break-word; /* Ensures long words wrap */
-    padding: 0 20px; /* Optional: adds padding for readability */
-  }
-  
-  
-  
-  @media (min-width: 768px) {
-    .homepage-main {
-      flex-direction: row;
-    }
-  }
-  
+.navbar {
+  position: relative;
+  z-index: 10;
+}
+
+.homepage-header {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Centers the text horizontally */
+}
+
+
+.homepage-header img {
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image fills its container */
+  display: block; /* Remove any inline spacing issues */
+  position: relative; /* Contain the image within the header */
+  z-index: 0; /* Ensure it doesn't interfere with other elements */
+  width: 100%;
+}
+
+.homepage header p {
+  max-width: 800px; /* Optional: limits the width of the paragraph */
+  line-height: 1.8;
+  font-size: 18px;
+  text-align: center; /* Ensures the text is centered */
+  word-wrap: break-word; /* Ensures long words wrap to the next line */
+}
+
+.homepage header h1 {
+  text-align: center;
+}
