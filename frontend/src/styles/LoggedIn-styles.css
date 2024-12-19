@@ -1,0 +1,28 @@
+.logged-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+  }
+  
+  .logged-in h1 {
+    color: #282c34;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .logged-in p {
+    color: #555;
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .loading, .error {
+    color: #d9534f;
+  }
+  

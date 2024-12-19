@@ -1,41 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { useHistory } from 'react-router-dom';
+import HotelList from '../components/HotelList';
+import '../styles/LoggedIn-styles.css';
 
 const LoggedIn: React.FC = () => {
-  const [hotels, setHotels] = useState<any[]>([]); // Spara hotelldata
-  const [favorites, setFavorites] = useState<string[]>([]); // Spara favoritmarkeringar
+  const [hotels, setHotels] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-//   const history = useHistory();
+  const [error, setError] = useState<string | null>(null);
+  // const [favorites, setFavorites] = useState<string[]>([]);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // Hämta hotell och favoritmarkerade hotell när användaren är inloggad
-    const fetchHotels = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get('/api/hotels');
-        setHotels(response.data);
-      } catch (error) {
-        console.error('Error fetching hotels:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHotels();
+    const savedToken = localStorage.getItem('token');
+    if (savedToken) {
+      setToken(savedToken);
+    } else {
+      setError('Ingen giltig token hittades. Logga in för att fortsätta.');
+    }
   }, []);
 
-  const handleFavorite = (hotelId: string) => {
-    setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(hotelId)) {
-        // Ta bort från favoriter om det redan är markerat
-        return prevFavorites.filter((id) => id !== hotelId);
-      } else {
-        // Lägg till i favoriter
-        return [...prevFavorites, hotelId];
-      }
-    });
+  const fetchHotels = async () => {
+    if (!token) {
+      setError('Ingen giltig token hittades. Logga in för att fortsätta.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axios.get('/api/hotels', {
+        params: {
+          latitude: '51.509865',
+          longitude: '-0.118092',
+          pageNumber: 1,
+          currencyCode: 'USD',
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setHotels(response.data?.hotels || []); 
+      console.error('Error fetching hotels:', error);
+      setError('Fel vid hämtning av hotellinformation.');
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    if (token) {
+      fetchHotels();
+    }
+  }, [token]);
 
   return (
     <div className="logged-in">
@@ -43,19 +61,10 @@ const LoggedIn: React.FC = () => {
 
       {loading ? (
         <p>Laddar hotell...</p>
+      ) : error ? (
+        <p>{error}</p>
       ) : (
-        <div>
-          <h2>Tillgängliga hotell</h2>
-          {hotels.map((hotel) => (
-            <div key={hotel.id} className="hotel-item">
-              <h3>{hotel.name}</h3>
-              <p>{hotel.description}</p>
-              <button onClick={() => handleFavorite(hotel.id)}>
-                {favorites.includes(hotel.id) ? 'Ta bort från favoriter' : 'Lägg till i favoriter'}
-              </button>
-            </div>
-          ))}
-        </div>
+        <HotelList hotels={hotels} />
       )}
     </div>
   );
