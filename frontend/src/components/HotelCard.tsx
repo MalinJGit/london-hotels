@@ -8,7 +8,6 @@ interface Hotel {
   rating: number;
 }
 
-// Props för komponenten
 interface HotelCardProps {
   hotel: Hotel;
 }
