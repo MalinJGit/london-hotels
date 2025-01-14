@@ -5,6 +5,13 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    specPattern: 'cypress/component/**/*.cy.{js,jsx,ts,tsx}',
+    specPattern: "cypress/component/**/*.cy.{js,jsx,ts,tsx}",
+  },
+
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
+    },
   },
 });
