@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/LoginForm.css'; // Importera CSS-filen
+import { useNavigate } from 'react-router-dom';
+import '../styles/LoginForm.css';
 
-const LoginForm: React.FC = () => {
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
+
+const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,11 +22,21 @@ const LoginForm: React.FC = () => {
         email,
         password,
       });
-      setMessage(response.data.message);
-      setError(null);
-      localStorage.setItem('token', response.data.token); // Sparar token
+
+      if (response.data.token) {
+        setMessage("Inloggning lyckades!");
+        setError(null);
+        localStorage.setItem('token', response.data.token);
+
+        onLoginSuccess();
+
+        navigate('/logged-in'); 
+      } else {
+        setError("Felaktig inloggning");
+        setMessage(null);
+      }
     } catch (error: any) {
-      setError(error.response?.data?.message || 'Något gick fel');
+      setError(error.response?.data || 'Något gick fel vid inloggning');
       setMessage(null);
     }
   };

@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import HotelDetails from './pages/HotelDetails';
 // import AboutPage from './pages/AboutPage';
 import Login from './components/Login';
 import SignupForm from './components/Signup';
+import LoggedIn from './pages/LoggedIn';
 
 const App: React.FC = () => {
   return (
@@ -14,9 +14,11 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/hotel/:id" element={<HotelDetails />} />
         {/* <Route path="/about" element={<AboutPage />} /> */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLoginSuccess={function (): void {
+          throw new Error('Function not implemented.');
+        } } />} />
+        <Route path="/logged-in" element={<LoggedIn />} />
         <Route path="/signup" element={<SignupForm />} />
       </Routes>
       <Footer />
