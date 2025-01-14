@@ -8,7 +8,7 @@ interface Hotel {
   provider: string;
   priceForDisplay: string | null;
   strikethroughPrice: string | null;
-  imageUrl?: string; // Om det finns ett fält för bild
+  imageUrl?: string;
 }
 
 interface HotelListProps {
