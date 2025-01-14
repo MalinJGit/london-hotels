@@ -3,6 +3,7 @@
     "@cypress/react": "^9.0.0",
     "@cypress/webpack-dev-server": "^4.0.0",
     "@types/cypress": "^1.1.6",
-    "cypress": "^13.17.0"
+    "cypress": "^13.17.0",
+    "typescript": "^5.7.3"
   }
 }
