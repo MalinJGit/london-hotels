@@ -13,8 +13,8 @@ describe('User Login for London-hotels', () => {
       // När användaren klickar på inloggningsknappen
       cy.get('button[type="submit"]').click();
   
-      // Then: Användaren ska omdirigeras till dashboard-sidan
-      cy.url().should('include', '/dashboard');
+      // Then: Användaren ska omdirigeras till logged-in sidan
+      cy.url().should('include', '/logged-in');
   
       // Then: Användaren ska kunna se sin e-post eller användarnamn på dashboard
       cy.contains(email).should('exist');

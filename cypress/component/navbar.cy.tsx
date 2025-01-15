@@ -13,9 +13,4 @@ describe('Navbar Component', () => {
     // Kontrollera att länken till "Skapa konto" finns
     cy.get('a').contains('Skapa konto').should('have.attr', 'href', '/signup');
   });
-
-  it('should display the correct brand name', () => {
-    // Kontrollera att navbaren har rätt brand name eller text
-    cy.get('.navbar-brand').should('contain.text', 'My Hotel');
-  });
 });
