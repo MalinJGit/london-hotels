@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import useLogin from '../components/useLogin';
 import '../styles/LoginForm.css';
 
 interface LoginProps {
@@ -8,42 +7,16 @@ interface LoginProps {
 }
 
 const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const { email, setEmail, password, setPassword, error, message, handleLogin } = useLogin();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post('http://localhost:5003/api/login', {
-        email,
-        password,
-      });
-
-      if (response.data.token) {
-        setMessage("Inloggning lyckades!");
-        setError(null);
-        localStorage.setItem('token', response.data.token);
-
-        onLoginSuccess();
-
-        navigate('/logged-in'); 
-      } else {
-        setError("Felaktig inloggning");
-        setMessage(null);
-      }
-    } catch (error: any) {
-      setError(error.response?.data || 'Något gick fel vid inloggning');
-      setMessage(null);
-    }
+  const onSubmit = async (e: React.FormEvent) => {
+    const success = await handleLogin(e);
+    if (success) onLoginSuccess();
   };
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleLogin}>
+      <form className="login-form" onSubmit={onSubmit}>
         <h2>Logga In</h2>
         <div>
           <label>Email</label>
@@ -55,7 +28,7 @@ const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           />
         </div>
         <div>
-          <label>Password</label>
+          <label>Lösenord</label>
           <input
             type="password"
             value={password}

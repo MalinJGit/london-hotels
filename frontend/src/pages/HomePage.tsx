@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
+import LoginForm from '../components/LoginForm';
 import '../styles/HomePage.css';
+import '../styles/Button.css';
 
 const HomePage: React.FC = () => {
-  
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Kontrollera om användaren är inloggad
-  useEffect(() => {
-    const savedToken = localStorage.getItem('token'); // Hämta token från localStorage
-    if (savedToken) {
-    }
-  }, []);
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+  };
 
   return (
     <div className="homepage">
@@ -25,13 +24,63 @@ const HomePage: React.FC = () => {
         <h2>Your Ideal London Hotel Awaits</h2>
         <p>To make your stay even easier, create an account or log in to explore a curated list of available hotels in London. Once you're logged in, you'll have access to the best rates, availability updates, and a seamless booking experience. Don't miss out on finding your ideal stay in this vibrant, world-class city!</p>
 
-          <div>
-            <p>Please log in to see available hotels in London.</p>
+        <div>
+          <p>Please log in to see available hotels in London.</p>
+          <button className="login-button"
+          onClick={() => setShowLoginModal(true)}>Logga in</button>
+        </div>
+
+        {showLoginModal && (
+          <div style={styles.modal}>
+            <div style={styles.modalContent}>
+              <button
+                style={styles.closeButton}
+                onClick={() => setShowLoginModal(false)} 
+              >
+                &times;
+              </button>
+              <LoginForm onLoginSuccess={handleLoginSuccess} />
+            </div>
           </div>
-       
+        )}
+
+<p>Don't have an account? Sign up for free here:</p>
+
       </header>
     </div>
   );
+};
+
+const styles: Record<string, React.CSSProperties> = {
+  modal: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: '20px',
+    borderRadius: '8px',
+    position: 'relative',
+    width: '90%',
+    maxWidth: '400px',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    background: 'none',
+    border: 'none',
+    fontSize: '20px',
+    cursor: 'pointer',
+  },
 };
 
 export default HomePage;
