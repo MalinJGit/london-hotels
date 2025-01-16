@@ -17,7 +17,7 @@ const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={onSubmit}>
-        <h2>Logga In</h2>
+        <h2>Log in</h2>
         <div>
           <label>Email</label>
           <input
@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           />
         </div>
         <div>
-          <label>Lösenord</label>
+          <label>Password</label>
           <input
             type="password"
             value={password}
@@ -36,7 +36,7 @@ const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             required
           />
         </div>
-        <button type="submit">Logga In</button>
+        <button type="submit">Log in</button>
         {message && <p className="success">{message}</p>}
         {error && <p className="error">{error}</p>}
       </form>

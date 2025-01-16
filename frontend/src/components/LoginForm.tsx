@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
 
   return (
     <form className="login-form" onSubmit={handleLogin}>
-      <h2>Logga In</h2>
+      <h2>Log in</h2>
       <div>
         <label>Email</label>
         <input

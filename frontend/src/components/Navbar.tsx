@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importera useNavigate för omdirigering
-import LoginForm from "../components/LoginForm"; // Importera LoginForm-komponenten
+import { useNavigate } from "react-router-dom";
+import LoginForm from "../components/LoginForm";
 
 const Navbar: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const navigate = useNavigate(); // Skapa navigate-funktionen
+  const navigate = useNavigate();
 
   const handleLoginSuccess = () => {
     setShowLoginModal(false);
-    navigate('/logged-in'); // Om användaren loggar in framgångsrikt, omdirigera till /logged-in
+    navigate('/logged-in');
   };
 
   return (
@@ -28,12 +28,12 @@ const Navbar: React.FC = () => {
         </li>
         <li style={styles.navItem}>
           <a href="/signup" style={styles.link}>
-            Skapa konto
+            Create account
           </a>
         </li>
         <li style={styles.navItem}>
           <a href="/about" style={styles.link}>
-            Om oss
+            About Us
           </a>
         </li>
       </ul>
