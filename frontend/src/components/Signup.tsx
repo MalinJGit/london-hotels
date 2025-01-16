@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/SignupForm.css'; // Importera CSS-filen
+import '../styles/SignupForm.css';
 
 const SignupForm: React.FC = () => {
   const [email, setEmail] = useState('');

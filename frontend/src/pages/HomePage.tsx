@@ -3,12 +3,18 @@ import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import '../styles/HomePage.css';
 import '../styles/Button.css';
+import SignupForm from '../components/Signup';
 
 const HomePage: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   const handleLoginSuccess = () => {
     setShowLoginModal(false);
+  };
+
+  const handleSignupSuccess = () => {
+    setShowSignupModal(false);
   };
 
   return (
@@ -27,7 +33,7 @@ const HomePage: React.FC = () => {
         <div>
           <p>Please log in to see available hotels in London.</p>
           <button className="login-button"
-          onClick={() => setShowLoginModal(true)}>Logga in</button>
+          onClick={() => setShowLoginModal(true)}>Log in</button>
         </div>
 
         {showLoginModal && (
@@ -44,12 +50,34 @@ const HomePage: React.FC = () => {
           </div>
         )}
 
-<p>Don't have an account? Sign up for free here:</p>
+        <div>
+          <p>Don't have an account? Sign up for free here:</p>
+          <button
+            className="signup-button"
+            onClick={() => setShowSignupModal(true)}
+          >
+            Create Account
+          </button>
+        </div>
 
+        {showSignupModal && (
+          <div style={styles.modal}>
+            <div style={styles.modalContent}>
+              <button
+                style={styles.closeButton}
+                onClick={() => setShowSignupModal(false)}
+              >
+                &times;
+              </button>
+              <SignupForm />
+            </div>
+          </div>
+        )}
       </header>
     </div>
   );
 };
+
 
 const styles: Record<string, React.CSSProperties> = {
   modal: {

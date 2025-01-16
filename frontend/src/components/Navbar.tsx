@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
             style={styles.link}
             onClick={(e) => {
               e.preventDefault();
-              setShowLoginModal(true); // Visa login-formuläret när användaren klickar
+              setShowLoginModal(true);
             }}
           >
             Logga in
