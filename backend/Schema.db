@@ -1,5 +1,15 @@
+CREATE TABLE hotels (
+    hotel_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    highlights TEXT[] NOT NULL,
+    stars INTEGER NOT NULL,
+    description TEXT,
+    image_url TEXT
+);
+
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
+  user_id SERIAL PRIMARY KEY,
   username VARCHAR(255) UNIQUE NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,

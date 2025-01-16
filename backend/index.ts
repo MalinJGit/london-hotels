@@ -46,11 +46,11 @@ app.post('/api/signup', async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const result = await pool.query(
-      'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id',
+      'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING user_id',
       [email, hashedPassword]
     );
 
-    const newUserId = result.rows[0].id;
+    const newUserId = result.rows[0].user_id;
     res.status(201).json({ message: `Användare skapad med ID: ${newUserId}` });
   } catch (error) {
     console.error('Error creating user:', error);
@@ -79,7 +79,7 @@ app.post('/api/login', async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Felaktig email eller lösenord' });
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, {
+    const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET as string, {
       expiresIn: '1h',
     });
 
