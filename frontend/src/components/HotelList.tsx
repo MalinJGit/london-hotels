@@ -2,7 +2,7 @@ import React from 'react';
 import HotelCard from './HotelCard';
 
 interface Hotel {
-  id: number;
+  hotel_id: number;
   name: string;
   address: string;
   highlights: string[];
@@ -20,7 +20,7 @@ const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
     <div className="hotel-list">
       {hotels.map((hotel) => (
         <HotelCard
-          key={hotel.id}
+          key={hotel.hotel_id}
           name={hotel.name}
           address={hotel.address}
           highlights={hotel.highlights}

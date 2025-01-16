@@ -1,7 +1,7 @@
 describe('HotelCard Component for London-hotels', () => {
   it('should render hotel details correctly and show an image', () => {
     const hotel = {
-      id: 1,
+      hotel_id: 1,
       name: 'Claridge\'s',
       price: 4500,
       location: 'Brook Street, Mayfair, London W1K 4HR',

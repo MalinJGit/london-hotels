@@ -113,7 +113,7 @@ app.get('/api/hotels', protect, async (req: Request, res: Response) => {
   try {
     const result = await pool.query(`
       SELECT 
-        id, 
+        hotel_id, 
         name, 
         address, 
         highlights, 
