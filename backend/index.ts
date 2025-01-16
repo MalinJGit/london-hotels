@@ -12,8 +12,7 @@ const port = process.env.PORT || 5003;
 
 // Middleware för att hantera CORS och JSON
 app.use(cors({
-  origin: 'http://localhost:5173',
-}));
+  origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 
 // PostgreSQL pool för databasanslutning

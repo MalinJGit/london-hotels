@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import HotelList from '../components/HotelList';
 import { fetchHotels } from '../services/hotelService';
 import '../styles/LoggedIn-styles.css';
+import '../styles/Footer-styles.css';
+import '../styles/Button.css';
 
 const LoggedIn: React.FC = () => {
   const [hotels, setHotels] = useState<any[]>([]);
@@ -50,7 +52,7 @@ const LoggedIn: React.FC = () => {
   return (
     <div className="logged-in">
       <h1>Välkommen till din profil</h1>
-      <button onClick={handleShowHotels}>Se tillgängliga hotell</button>
+      <button className="showHotels" onClick={handleShowHotels}>Se tillgängliga hotell</button>
 
       {loading ? (
         <p>Laddar hotell...</p>

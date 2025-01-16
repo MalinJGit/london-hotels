@@ -31,3 +31,20 @@
   .signup-button:hover {
     background-color: #344056;
   }
+
+  .showHotels {
+    width: 20%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #282c34;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+  }
+
+  .showHotels:hover {
+    background-color: #344056;
+  }

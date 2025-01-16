@@ -1,14 +1,14 @@
 import React from 'react';
+import HotelCard from './HotelCard';
 
 interface Hotel {
-  id: string;
-  title: string;
-  primaryInfo: string;
-  secondaryInfo: string;
-  provider: string;
-  priceForDisplay: string | null;
-  strikethroughPrice: string | null;
-  imageUrl?: string;
+  id: number;
+  name: string;
+  address: string;
+  highlights: string[];
+  stars: number;
+  description: string;
+  image_url: string;
 }
 
 interface HotelListProps {
@@ -18,31 +18,17 @@ interface HotelListProps {
 const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
   return (
     <div className="hotel-list">
-      {hotels.length > 0 ? (
-        hotels.map((hotel) => (
-          <div className="hotel-item" key={hotel.id}>
-            {hotel.imageUrl ? (
-              <img src={hotel.imageUrl} alt={hotel.title} className="hotel-image" />
-            ) : (
-              <div className="placeholder-image">Bild ej tillgänglig</div>
-            )}
-            <h3>{hotel.title}</h3>
-            <p>{hotel.primaryInfo}</p>
-            <p>{hotel.secondaryInfo}</p>
-            <p><strong>Provider:</strong> {hotel.provider}</p>
-            {hotel.priceForDisplay ? (
-              <p><strong>Price:</strong> {hotel.priceForDisplay}</p>
-            ) : (
-              <p><strong>Price:</strong> Pris inte tillgänglig</p>
-            )}
-            {hotel.strikethroughPrice && (
-              <p><s>{hotel.strikethroughPrice}</s></p>
-            )}
-          </div>
-        ))
-      ) : (
-        <p>Inga hotell tillgängliga.</p>
-      )}
+      {hotels.map((hotel) => (
+        <HotelCard
+          key={hotel.id}
+          name={hotel.name}
+          address={hotel.address}
+          highlights={hotel.highlights}
+          stars={hotel.stars}
+          description={hotel.description}
+          imageUrl={hotel.image_url}
+        />
+      ))}
     </div>
   );
 };

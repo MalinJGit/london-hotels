@@ -1,27 +1,38 @@
 import React from 'react';
-
-interface Hotel {
-  id: number;
-  name: string;
-  price: number;
-  location: string;
-  rating: number;
-}
+import './HotelCardStyle.css';
 
 interface HotelCardProps {
-  hotel: Hotel;
+  name: string;
+  address: string;
+  highlights: string[];
+  stars: number;
+  description: string;
+  imageUrl: string;
 }
 
-const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
+const HotelCard: React.FC<HotelCardProps> = ({ name, address, highlights, stars, description, imageUrl }) => {
+  const starIcons = Array.from({ length: stars }, (_, index) => (
+    <span key={index} className="star-icon">★</span>
+  ));
+
   return (
     <div className="hotel-card">
-      <div className="hotel-info">
-        <h2>{hotel.name}</h2>
-        <p>{hotel.location}</p>
-        <div className="hotel-rating">
-          <span>⭐ {hotel.rating}</span>
+      <img src={imageUrl} alt={name} className="hotel-card-image" />
+      <div className="hotel-card-stars">
+      {starIcons}
+      </div>
+      <div className="hotel-card-info">
+        <h2 className="hotel-card-name">{name}</h2>
+        <p className="hotel-card-address">{address}</p>
+        <div className="hotel-card-highlights">
+          <h4>Highlights:</h4>
+          <ul>
+            {highlights.map((highlight, index) => (
+              <li key={index}>{highlight}</li>
+            ))}
+          </ul>
+        <p className="hotel-card-description">{description}</p>
         </div>
-        <p className="hotel-price">Från {hotel.price} SEK per natt</p>
       </div>
     </div>
   );
