@@ -2,24 +2,31 @@ import React from 'react';
 import './HotelCardStyle.css';
 
 interface HotelCardProps {
+  hotelId: number;
   name: string;
   address: string;
   highlights: string[];
   stars: number;
   description: string;
   imageUrl: string;
+  onFavorite: (hotelId: number) => void;
+  isFavorited?: boolean;
 }
 
-const HotelCard: React.FC<HotelCardProps> = ({ name, address, highlights, stars, description, imageUrl }) => {
+const HotelCard: React.FC<HotelCardProps> = ({ hotelId, name, address, highlights, stars, description, imageUrl, onFavorite, isFavorited = false }) => {
   const starIcons = Array.from({ length: stars }, (_, index) => (
     <span key={index} className="star-icon">★</span>
   ));
+
+  const handleFavoriteClick = () => {
+    onFavorite(hotelId);
+  };
 
   return (
     <div className="hotel-card">
       <img src={imageUrl} alt={name} className="hotel-card-image" />
       <div className="hotel-card-stars">
-      {starIcons}
+        {starIcons}
       </div>
       <div className="hotel-card-info">
         <h2 className="hotel-card-name">{name}</h2>
@@ -31,8 +38,14 @@ const HotelCard: React.FC<HotelCardProps> = ({ name, address, highlights, stars,
               <li key={index}>{highlight}</li>
             ))}
           </ul>
-        <p className="hotel-card-description">{description}</p>
         </div>
+        <p className="hotel-card-description">{description}</p>
+        <button
+          onClick={handleFavoriteClick}
+          className={`favorite-button ${isFavorited ? 'favorited' : ''}`}
+        >
+          {isFavorited ? 'Unfavorite' : 'Save'}
+        </button>
       </div>
     </div>
   );

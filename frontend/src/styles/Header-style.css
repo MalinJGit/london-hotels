@@ -17,3 +17,7 @@
   max-height: 300px;
   object-fit: cover;
 }
+
+header, footer {
+  z-index: 50;
+}

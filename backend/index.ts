@@ -129,6 +129,56 @@ app.get('/api/hotels', protect, async (req: Request, res: Response) => {
   }
 });
 
+// Lägg till favorit
+app.post('/api/favorites', async (req, res) => {
+  const { userId, hotelId } = req.body; 
+
+  try {
+    const result = await pool.query(
+      'INSERT INTO favorites (user_id, hotel_id) VALUES ($1, $2) ON CONFLICT (user_id, hotel_id) DO NOTHING',
+      [userId, hotelId]
+    );
+    res.status(201).json({ message: 'Hotel added to favorites' });
+  } catch (error) {
+    console.error('Error adding favorite:', error);
+    res.status(500).json({ message: 'Could not add to favorites' });
+  }
+});
+
+// Ta bort favorit
+app.delete('/api/favorites', async (req, res) => {
+  const { userId, hotelId } = req.body;
+
+  try {
+    const result = await pool.query(
+      'DELETE FROM favorites WHERE user_id = $1 AND hotel_id = $2',
+      [userId, hotelId]
+    );
+    res.status(200).json({ message: 'Favorite removed' });
+  } catch (error) {
+    console.error('Error removing favorite:', error);
+    res.status(500).json({ message: 'Could not remove from favorites' });
+  }
+});
+
+// Hämta användarens favorit-hotell
+app.get('/api/favorites/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const result = await pool.query(
+      'SELECT h.* FROM hotels h JOIN favorites f ON h.id = f.hotel_id WHERE f.user_id = $1',
+      [userId]
+    );
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Error fetching favorites:', error);
+    res.status(500).json({ message: 'Could not fetch favorites' });
+  }
+});
+
+
+
 // Starta servern
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

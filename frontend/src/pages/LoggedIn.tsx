@@ -51,18 +51,17 @@ const LoggedIn: React.FC = () => {
 
   return (
     <div className="logged-in">
-      <h1>Välkommen till din profil</h1>
-      <button className="showHotels" onClick={handleShowHotels}>Se tillgängliga hotell</button>
+      <h1>Welcome to your account</h1>
+      <p>You can click on the below button to see available hotels in London. There are a range of different hotels who all have different prices and qualities. If you like a hotel you can click on the "save-button" and it will be saved to your account.</p>
+      <button className="showHotels" onClick={handleShowHotels}>See available hotels</button>
 
       {loading ? (
-        <p>Laddar hotell...</p>
+        <p>Loading hotel...</p>
       ) : error ? (
         <p>{error}</p>
       ) : showHotels ? (
         <HotelList hotels={hotels} />
-      ) : (
-        <p>Klicka på knappen för att visa tillgängliga hotell.</p>
-      )}
+      ) : null}
     </div>
   );
 };

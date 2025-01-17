@@ -12,25 +12,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center; /* Centers the text horizontally */
+  text-align: center;
 }
 
 
 .homepage-header img {
-  height: auto; /* Maintain aspect ratio */
-  object-fit: cover; /* Ensure the image fills its container */
-  display: block; /* Remove any inline spacing issues */
-  position: relative; /* Contain the image within the header */
-  z-index: 0; /* Ensure it doesn't interfere with other elements */
+  height: auto;
+  object-fit: cover;
+  display: block; 
+  position: relative; 
+  z-index: 0;
   width: 100%;
 }
 
 .homepage header p {
-  max-width: 800px; /* Optional: limits the width of the paragraph */
+  max-width: 800px;
   line-height: 1.8;
   font-size: 18px;
-  text-align: center; /* Ensures the text is centered */
-  word-wrap: break-word; /* Ensures long words wrap to the next line */
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .homepage header h1 {

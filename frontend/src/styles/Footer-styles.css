@@ -1,44 +1,38 @@
-/* Grundinställningar */
+
 html, body {
-  height: 100%; /* Se till att hela höjden är använd */
+  height: 100%;
   margin: 0;
 }
 
-/* Flexbox-layout för hela sidan */
 body {
   display: flex;
-  flex-direction: column; /* Lägg innehållet vertikalt */
+  flex-direction: column;
 }
 
-/* Innehåll som växer för att fylla utrymmet */
 .main-content {
-  flex: 1; /* Detta gör så att innehållet växer och fyller utrymmet mellan header och footer */
+  flex: 1;
 }
 
-/* Footer stil */
 .footer {
   background-color: #282c34;
   color: white;
   padding: 10px 0;
   text-align: center;
   width: 100%;
-  margin-top: auto; /* Det här gör att footern stannar längst ner */
+  margin-top: auto;
 }
 
-/* Innehåll i footern */
 .footer-content {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  margin-bottom: -60px; /* Detta kan orsaka problem, se till att ta bort eller justera detta om det behövs */
+  margin-bottom: -60px;
 }
 
-/* Sektioner i footern */
 .footer-section {
   width: 200px;
 }
 
-/* Footerens bottentext */
 .footer-bottom {
   margin-top: 10px;
   font-size: 0.9rem;
