@@ -15,3 +15,15 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE favorites (
+    id SERIAL PRIMARY KEY,
+    hotel_id INTEGER NOT NULL,
+    email VARCHAR(255),
+    CONSTRAINT favorites_email_hotel_id_key UNIQUE (email, hotel_id),
+    CONSTRAINT favorites_hotel_id_fkey FOREIGN KEY (hotel_id) REFERENCES hotels(hotel_id) ON DELETE CASCADE,
+    CONSTRAINT fk_email FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
+);
+
+
+
