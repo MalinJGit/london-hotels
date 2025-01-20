@@ -2,35 +2,67 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
-const Navbar: React.FC = () => {
+function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const handleLoginSuccess = () => {
     setShowLoginModal(false);
-    navigate('/logged-in');
+    setIsLoggedIn(true);
+    navigate("/logged-in");
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
     <nav style={styles.navbar}>
       <ul style={styles.navList}>
-        <li style={styles.navItem}>
-          <a
-            href="#"
-            style={styles.link}
-            onClick={(e) => {
-              e.preventDefault();
-              setShowLoginModal(true);
-            }}
-          >
-            Logga in
-          </a>
-        </li>
-        <li style={styles.navItem}>
-          <a href="/signup" style={styles.link}>
-            Create account
-          </a>
-        </li>
+        {!isLoggedIn && (
+          <>
+            <li style={styles.navItem}>
+              <a
+                href="#"
+                style={styles.link}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowLoginModal(true);
+                } }
+              >
+                Log in
+              </a>
+            </li>
+            <li style={styles.navItem}>
+              <a href="/signup" style={styles.link}>
+                Create account
+              </a>
+            </li>
+          </>
+        )}
+        {isLoggedIn && (
+          <>
+            <li style={styles.navItem}>
+              <a
+                href="#"
+                style={styles.link}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLogout();
+                } }
+              >
+                Log out
+              </a>
+            </li>
+            <li style={styles.navItem}>
+              <a href="/favorites" style={styles.link}>
+                Favorites
+              </a>
+            </li>
+          </>
+        )}
         <li style={styles.navItem}>
           <a href="/about" style={styles.link}>
             About Us
@@ -39,8 +71,11 @@ const Navbar: React.FC = () => {
       </ul>
 
       {showLoginModal && (
-        <div style={styles.modal}>
-          <div style={styles.modalContent}>
+        <div style={styles.modal} onClick={() => setShowLoginModal(false)}>
+          <div
+            style={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               style={styles.closeButton}
               onClick={() => setShowLoginModal(false)}
@@ -53,7 +88,7 @@ const Navbar: React.FC = () => {
       )}
     </nav>
   );
-};
+}
 
 const styles: Record<string, React.CSSProperties> = {
   navbar: {

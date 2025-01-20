@@ -37,7 +37,7 @@
 
 .hotel-card-address {
   color: #777;
-  margin-top: 8px;
+  margin-top: 3px;
   font-size: 0.3rem;
   font-style: italic;
 }
@@ -56,17 +56,16 @@
 
 .hotel-card-description {
   color: #555;
-  margin-top: 12px;
+  margin-top: 5px;
   font-size: 1.1em;
   max-height: 100px;
 }
 
 .hotel-card-address {
   color: #555;
-  margin-top: 12px;
-  font-size: 1.0em;
+  margin-top: 5px;
   max-height: 100px;
-  font-size: 0.9em;
+  font-size: 0.8rem;
 }
 
 .hotel-card-highlights {
@@ -94,36 +93,33 @@
 }
 
 .favorite-button {
-  color: #ffffff;
-    background-color: #282c34;
-  padding: 12px 24px; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  text-align: center; 
-  display: inline-flex; 
-  justify-content: center; 
+  background-color: #282c34;
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 5px;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
   align-items: center;
-  font-size: 16px; 
-  font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease; 
+  gap: 8px;
+  display: inline-flex;
   width: 100px;
 }
 
-.favorite-button:hover {
-  background-color: #e0e0e0; 
-  transform: scale(1.05); 
-}
-
 .favorite-button.favorited {
-  background-color: #4CAF50; 
+  background-color: #282c34;
   color: white;
 }
 
-.favorite-button.favorited:hover {
-  background-color: #45a049; 
-  transform: scale(1.05); 
+.favorite-icon {
+  font-size: 18px;
 }
+
+.favorite-button.favorited .favorite-icon {
+  color: #ff4081;
+}
+
 
 .hotel-list {
   margin: 20px auto;

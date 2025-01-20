@@ -1,35 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HotelCard from './HotelCard';
-import '../index.css';
-
-interface Hotel {
-  hotel_id: number;
-  name: string;
-  address: string;
-  highlights: string[];
-  stars: number;
-  description: string;
-  image_url: string;
-}
 
 interface HotelListProps {
-  hotels: Hotel[];
+  hotels: any[];
+  favorites: number[];
+  onFavorite: (hotelId: number) => void;
 }
 
-const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
-  const [favorites, setFavorites] = useState<number[]>([]);
-
-  const handleFavorite = (hotelId: number) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(hotelId)
-        ? prevFavorites.filter((id) => id !== hotelId)
-        : [...prevFavorites, hotelId]
-    );
-  };
+const HotelList: React.FC<HotelListProps> = ({ hotels, favorites, onFavorite }) => {
+  function handleFavorite(hotelId: number): void {
+    onFavorite(hotelId);
+  }
 
   return (
-    <div className="hotel-list-container">
-      <div className="hotel-list">
+    <div className="hotel-list">
         {hotels.map((hotel) => (
           <HotelCard
             key={hotel.hotel_id}
@@ -40,13 +24,14 @@ const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
             stars={hotel.stars}
             description={hotel.description}
             imageUrl={hotel.image_url}
-            onFavorite={handleFavorite}
+            onFavorite={() => handleFavorite(hotel.hotel_id)}
             isFavorited={favorites.includes(hotel.hotel_id)}
           />
         ))}
-      </div>
     </div>
   );
 };
+
+
 
 export default HotelList;

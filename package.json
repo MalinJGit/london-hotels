@@ -1,12 +1,16 @@
 {
   "devDependencies": {
     "@cypress/react": "^9.0.0",
-    "@cypress/webpack-dev-server": "^4.0.0",
+    "@cypress/webpack-dev-server": "^4.0.1",
     "@types/cypress": "^1.1.6",
     "@types/node": "^22.10.6",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.4",
-    "cypress": "^13.17.0",
+    "cypress": "^14.0.0",
     "typescript": "^5.7.3",
     "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.1.3"
   }
 }

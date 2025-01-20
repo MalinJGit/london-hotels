@@ -79,7 +79,7 @@ app.post('/api/login', async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Felaktig email eller lösenord' });
     }
 
-    const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET as string, {
+    const token = jwt.sign({ userId: user.user_id, email: user.email}, process.env.JWT_SECRET as string, {
       expiresIn: '1h',
     });
 
@@ -91,7 +91,7 @@ app.post('/api/login', async (req: Request, res: Response) => {
 });
 
 // Middleware för att skydda rutter och validera JWT
-const protect = (req: Request & { user?: { userId: number } }, res: Response, next: NextFunction) => {
+const protect = (req: Request & { user?: { userId: number; email: string } }, res: Response, next: NextFunction) => {
   const token = req.headers['authorization']?.split(' ')[1];
 
   if (!token) {
@@ -99,7 +99,7 @@ const protect = (req: Request & { user?: { userId: number } }, res: Response, ne
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: number };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: number; email: string };
     req.user = decoded;
     next();
   } catch (error) {
@@ -129,54 +129,89 @@ app.get('/api/hotels', protect, async (req: Request, res: Response) => {
   }
 });
 
-// Lägg till favorit
-app.post('/api/favorites', async (req, res) => {
-  const { userId, hotelId } = req.body; 
+// Användare kan favoritmarkera ett hotell
+app.post('/api/favorites', protect, async (req: Request & { user?: { userId: number; email: string } }, res: Response) => {
+  
+  
+  console.log('Request body:', req.body);
+  console.log('User email:', req.user?.email);
+
+  const { hotel_id } = req.body;
+  const email = req.user?.email;
+
+  if (!hotel_id || !email) {
+    return res.status(400).json({ message: 'Hotel ID och email krävs' });
+  }
 
   try {
-    const result = await pool.query(
-      'INSERT INTO favorites (user_id, hotel_id) VALUES ($1, $2) ON CONFLICT (user_id, hotel_id) DO NOTHING',
-      [userId, hotelId]
-    );
-    res.status(201).json({ message: 'Hotel added to favorites' });
+    const query = `
+      INSERT INTO favorites (email, hotel_id)
+      VALUES ($1, $2)
+      ON CONFLICT (email, hotel_id) DO NOTHING
+      RETURNING id
+    `;
+    const { rows } = await pool.query(query, [email, hotel_id]);
+    if (rows.length === 0) {
+      return res.status(409).json({ message: 'Hotellet är redan favoriterat' });
+    }
+    res.status(201).json({ message: 'Favorit tillagd', favoriteId: rows[0].id });
   } catch (error) {
     console.error('Error adding favorite:', error);
-    res.status(500).json({ message: 'Could not add to favorites' });
+    res.status(500).json({ message: 'Internt serverfel' });
   }
 });
 
-// Ta bort favorit
-app.delete('/api/favorites', async (req, res) => {
-  const { userId, hotelId } = req.body;
+// Hämtar alla hotell som användare har favoritmarkerat
+app.get('/api/favorites', protect, async (req: Request & { user?: { userId: number; email: string } }, res: Response) => {
+  console.log('User email:', req.user?.email);
+  
+  const email = req.user?.email;
 
-  try {
-    const result = await pool.query(
-      'DELETE FROM favorites WHERE user_id = $1 AND hotel_id = $2',
-      [userId, hotelId]
-    );
-    res.status(200).json({ message: 'Favorite removed' });
-  } catch (error) {
-    console.error('Error removing favorite:', error);
-    res.status(500).json({ message: 'Could not remove from favorites' });
+  if (!email) {
+    return res.status(400).json({ message: 'Email krävs' });
   }
-});
-
-// Hämta användarens favorit-hotell
-app.get('/api/favorites/:userId', async (req, res) => {
-  const userId = req.params.userId;
 
   try {
-    const result = await pool.query(
-      'SELECT h.* FROM hotels h JOIN favorites f ON h.id = f.hotel_id WHERE f.user_id = $1',
-      [userId]
-    );
-    res.status(200).json(result.rows);
+    const query = `
+      SELECT f.id AS favorite_id, h.hotel_id, h.name, h.address, h.stars, h.image_url
+      FROM favorites f
+      INNER JOIN hotels h ON f.hotel_id = h.hotel_id
+      WHERE f.email = $1
+    `;
+    const { rows } = await pool.query(query, [email]);
+    res.status(200).json(rows);
   } catch (error) {
     console.error('Error fetching favorites:', error);
-    res.status(500).json({ message: 'Could not fetch favorites' });
+    res.status(500).json({ message: 'Internt serverfel' });
   }
 });
 
+// Ta bort favoritmarkeringen
+app.delete('/api/favorites/:hotel_id', protect, async (req: Request & { user?: { userId: number; email: string } }, res: Response) => {
+  console.log('DELETE request received');
+  const { hotel_id } = req.params;
+  const email = req.user?.email;
+
+  if (!hotel_id || !email) {
+    return res.status(400).json({ message: 'Hotel ID och email krävs' });
+  }
+
+  try {
+    const query = `
+      DELETE FROM favorites
+      WHERE email = $1 AND hotel_id = $2
+      RETURNING id
+    `;
+    const { rows } = await pool.query(query, [email, hotel_id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Favoriten hittades inte' });
+    }
+    res.status(200).json({ message: 'Favorit borttagen' });
+  } catch (error) {
+    console.error('Error deleting favorite:', error);
+    res.status(500).json({ message: 'Internt serverfel' });
+  }
+});
 
 
 // Starta servern

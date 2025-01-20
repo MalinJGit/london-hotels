@@ -10,41 +10,45 @@ interface HotelCardProps {
   description: string;
   imageUrl: string;
   onFavorite: (hotelId: number) => void;
-  isFavorited?: boolean;
+  isFavorited: boolean;
 }
 
-const HotelCard: React.FC<HotelCardProps> = ({ hotelId, name, address, highlights, stars, description, imageUrl, onFavorite, isFavorited = false }) => {
-  const starIcons = Array.from({ length: stars }, (_, index) => (
-    <span key={index} className="star-icon">★</span>
-  ));
-
+const HotelCard: React.FC<HotelCardProps> = ({
+  hotelId,
+  name,
+  address,
+  highlights,
+  stars,
+  description,
+  imageUrl,
+  onFavorite,
+  isFavorited,
+}) => {
   const handleFavoriteClick = () => {
     onFavorite(hotelId);
   };
 
+  const starIcons = Array(stars).fill('⭐');
+
   return (
     <div className="hotel-card">
       <img src={imageUrl} alt={name} className="hotel-card-image" />
-      <div className="hotel-card-stars">
-        {starIcons}
-      </div>
       <div className="hotel-card-info">
-        <h2 className="hotel-card-name">{name}</h2>
-        <p className="hotel-card-address">{address}</p>
-        <div className="hotel-card-highlights">
-          <h4>Highlights:</h4>
-          <ul>
-            {highlights.map((highlight, index) => (
-              <li key={index}>{highlight}</li>
-            ))}
-          </ul>
+      <div className="stars">
+          {starIcons && starIcons.map((star, index) => (
+            <span key={index} className="star-icon">{star}</span>
+          ))}
         </div>
-        <p className="hotel-card-description">{description}</p>
-        <button
-          onClick={handleFavoriteClick}
-          className={`favorite-button ${isFavorited ? 'favorited' : ''}`}
-        >
-          {isFavorited ? 'Unfavorite' : 'Save'}
+        <h2>{name}</h2>
+        <p className='hotel-card-address'>{address}</p>
+        <ul className="highlights-list">
+          {highlights && highlights.map((highlight, index) => (
+            <li key={index}>{highlight}</li>
+          ))}
+        </ul>
+        <p>{description}</p>
+        <button onClick={handleFavoriteClick} className="favorite-button">
+          {isFavorited ? '❤️ Unsave' : '🤍 Save'}
         </button>
       </div>
     </div>

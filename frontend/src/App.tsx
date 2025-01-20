@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import SignupForm from './components/Signup';
 import LoggedIn from './pages/LoggedIn';
+import Favorites from './pages/Favorites';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,9 @@ const App: React.FC = () => {
           throw new Error('Function not implemented.');
         } } />} />
         <Route path="/logged-in" element={<LoggedIn />} />
+        <Route path="/favorites" element={<Favorites favoriteHotels={[]} favorites={[]} onFavorite={function (hotelId: number): void {
+          throw new Error('Function not implemented.');
+        } } />} />
         <Route path="/signup" element={<SignupForm />} />
       </Routes>
       <Footer />

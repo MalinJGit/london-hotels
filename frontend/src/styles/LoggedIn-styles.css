@@ -9,6 +9,7 @@
   color: #333;
   padding: 20px;
   box-sizing: border-box; 
+  align-content: center;
 }
 
 .logged-in p {
@@ -17,4 +18,11 @@
   font-size: 18px;
   text-align: center;
   word-wrap: break-word;
+}
+
+h2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }

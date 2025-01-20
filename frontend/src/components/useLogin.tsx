@@ -20,16 +20,16 @@ const useLogin = () => {
         setMessage('Inloggning lyckades!');
         setError(null);
         localStorage.setItem('token', response.data.token);
-        return true;  // Signalera lyckad inloggning
+        return true; 
       } else {
         setError('Felaktig inloggning');
         setMessage(null);
-        return false;  // Signalera misslyckad inloggning
+        return false; 
       }
     } catch (error: any) {
       setError(error.response?.data || 'Något gick fel vid inloggning');
       setMessage(null);
-      return false;  // Signalera misslyckad inloggning
+      return false;  
     }
   };
 

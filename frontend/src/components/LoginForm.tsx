@@ -57,7 +57,7 @@ const LoginForm: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           required
         />
       </div>
-      <button type="submit">Logga In</button>
+      <button type="submit">Log in</button>
       {message && <p className="success">{message}</p>}
       {error && <p className="error">{error}</p>}
     </form>
