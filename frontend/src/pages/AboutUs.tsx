@@ -23,11 +23,10 @@ const AboutUs: React.FC = () => {
     return (
         <div className="about-us-container">
             <header className="about-us-header">
-                <h1>About the creators behind this site</h1>
+                <h1>About us</h1>
             </header>
 
             <section className="about-us-content">
-                <h2>Our history</h2>
                 <p>
                     We are a team of London lovers who know how hard it can be to find suitable hotels. We therefore wanted to create a site where people can easy get information about different hotels and hopefully find a suitable hotels for their needs.
                 </p>

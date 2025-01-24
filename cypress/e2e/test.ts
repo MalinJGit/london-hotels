@@ -12,7 +12,7 @@ When('Jag rör datormusen över navbaren och klickar på texten "About us"', () 
 })
 
 Then('Blir då omdirigerad till en ny sida med information om skaparna', () => {
-    cy.url().should('include', '/about-us');
+    cy.url().should('include', '/about');
     cy.get('h1').contains('About us').should('be.visible');
 });
 
