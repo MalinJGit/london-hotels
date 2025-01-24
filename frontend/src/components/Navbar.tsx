@@ -24,7 +24,7 @@ function Navbar() {
       <li style={styles.navItem}>
           <Link to="/" style={styles.link}>Home</Link>
         </li>
-        
+
         {!isLoggedIn && (
           <>
             <li style={styles.navItem}>
@@ -69,7 +69,7 @@ function Navbar() {
         )}
         <li style={styles.navItem}>
           <a href="/about" style={styles.link}>
-            About Us
+            About us
           </a>
         </li>
       </ul>
