@@ -1,4 +1,4 @@
-Feature: About us-sida (Om oss sida)
+Feature: About us (Om oss sida)
 
 I navbaren på hemsidan ska det finnas en text "About us" och användare ska kunna klicka på denna text och då bli omdirigerad till en sida med information om skaparna bakom hemsidan.
 
