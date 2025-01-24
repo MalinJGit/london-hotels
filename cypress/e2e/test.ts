@@ -22,7 +22,7 @@ Then('Jag vill också kunna skapa ett konto eller logga in från About us-sidans
   });
 
   Then('Jag vill också kunna gå tillbaka till startsidan via en länk i navbaren', () => {
-    cy.get('navbar').contains('Homepage').should('be.visible');
-    cy.get('navbar').contains('Homepage').click();
+    cy.get('navbar').contains('Home').should('be.visible');
+    cy.get('navbar').contains('Home').click();
     cy.url().should('eq', 'http://localhost:5173/');
   });
