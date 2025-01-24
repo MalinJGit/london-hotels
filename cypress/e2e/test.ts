@@ -16,7 +16,7 @@ Then('Blir då omdirigerad till en ny sida med information om skaparna', () => {
     cy.get('h1').contains('About us').should('be.visible');
 });
 
-Then('Jag vill också kunna skapa ett konto eller logga in från About us-sidans. Därbör bör login-form vara tillgänglig', () => {
+Then('Jag vill också kunna skapa ett konto eller logga in. Därbör bör login-form vara tillgänglig', () => {
     cy.get('button').contains('Create Account').should('be.visible');
     cy.get('button').contains('Log In').should('be.visible');
   });
