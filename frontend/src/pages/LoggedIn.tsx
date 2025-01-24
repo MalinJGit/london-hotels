@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HotelList from '../components/HotelList';
 import FavoriteHotels from '../pages/FavoriteHotels';
-import { fetchHotels, fetchFavorites, addFavorite, deleteFavorite } from '../services/hotelService'; // Lägg till addFavorite och deleteFavorite
+import { fetchHotels, fetchFavorites, addFavorite, deleteFavorite } from '../services/hotelService';
 import '../styles/LoggedIn-styles.css';
 import '../styles/Footer-styles.css';
 import '../styles/Button.css';
@@ -13,6 +13,7 @@ const LoggedIn: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<number[]>([]);
 
+  
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
     if (savedToken) {

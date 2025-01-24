@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import '../styles/HomePage.css';
@@ -8,13 +9,18 @@ import SignupForm from '../components/Signup';
 const HomePage: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [ isLoggedIn,setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleLoginSuccess = () => {
     setShowLoginModal(false);
+    setIsLoggedIn(true);
+    navigate("/logged-in");
   };
 
   const handleSignupSuccess = () => {
     setShowSignupModal(false);
+    navigate("/");
   };
 
   return (
@@ -69,7 +75,7 @@ const HomePage: React.FC = () => {
               >
                 &times;
               </button>
-              <SignupForm />
+              <SignupForm onSignupSuccess={handleSignupSuccess}/>
             </div>
           </div>
         )}

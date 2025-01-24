@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-// import AboutPage from './pages/AboutPage';
+import AboutUs from './pages/AboutUs';
 import Login from './components/Login';
 import SignupForm from './components/Signup';
 import LoggedIn from './pages/LoggedIn';
@@ -15,7 +15,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/about" element={<AboutPage />} /> */}
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/login" element={<Login onLoginSuccess={function (): void {
           throw new Error('Function not implemented.');
         } } />} />
@@ -23,7 +23,9 @@ const App: React.FC = () => {
         <Route path="/favorites" element={<Favorites favoriteHotels={[]} favorites={[]} onFavorite={function (hotelId: number): void {
           throw new Error('Function not implemented.');
         } } />} />
-        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/signup" element={<SignupForm onSignupSuccess={function (): void {
+          throw new Error('Function not implemented.');
+        } } />} />
       </Routes>
       <Footer />
     </Router>

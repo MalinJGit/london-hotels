@@ -1,4 +1,4 @@
-// Exempel på komponenten FavoriteHotels
+
 import React from 'react';
 
 interface FavoriteHotelsProps {

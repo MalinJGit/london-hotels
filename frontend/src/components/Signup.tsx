@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/SignupForm.css';
 
-const SignupForm: React.FC = () => {
+interface SignupFormProps {
+  onSignupSuccess: () => void;
+}
+
+const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -18,6 +22,8 @@ const SignupForm: React.FC = () => {
       });
       setMessage(response.data.message);
       setError(null);
+
+  onSignupSuccess();
     } catch (error: any) {
       setError(error.response?.data?.message || 'Något gick fel');
       setMessage(null);
