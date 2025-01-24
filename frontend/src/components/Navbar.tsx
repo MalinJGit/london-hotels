@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
 function Navbar() {
@@ -21,6 +21,10 @@ function Navbar() {
   return (
     <nav style={styles.navbar}>
       <ul style={styles.navList}>
+      <li style={styles.navItem}>
+          <Link to="/" style={styles.link}>Home</Link>
+        </li>
+        
         {!isLoggedIn && (
           <>
             <li style={styles.navItem}>
