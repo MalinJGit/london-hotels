@@ -21,8 +21,8 @@ Then('Jag vill också kunna skapa ett konto eller logga in från About us-sidans
     cy.get('button').contains('Log In').should('be.visible');
   });
 
-  Then('Det hade också varit smidigt med en "tillbaka" knapp för att snabbt komma tillbaka till startsidan', () => {
-    cy.get('button').contains('Back to startpage').should('be.visible');
-    cy.get('button').contains('Back to startpage').click();
+  Then('Jag vill också kunna gå tillbaka till startsidan via en länk i navbaren', () => {
+    cy.get('navbar').contains('Homepage').should('be.visible');
+    cy.get('navbar').contains('Homepage').click();
     cy.url().should('eq', 'http://localhost:5173/');
   });

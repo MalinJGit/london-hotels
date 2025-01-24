@@ -7,4 +7,4 @@ Given: Jag är på startsidan och kan se texten "About us" i sidans navbar högs
 When: Jag klickar på texten "About us"
 Then: Blir då omdirigerad till en ny sida med information om skaparna.
 Then: Jag vill också kunna skapa ett konto eller logga in från About us-sidans
-Then: Det hade också varit smidigt med en "tillbaka" knapp för att snabbt komma tillbaka till startsidan
+Then: Jag vill kunna gå tillbaka till startsidan via en länk i navbaren med Homepage
