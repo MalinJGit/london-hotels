@@ -19,7 +19,7 @@ Then('Blir då omdirigerad till en ny sida med information om skaparna', () => {
 
 Then('Jag vill också kunna skapa ett konto eller logga in.', () => {
   cy.get('button').contains('Create Account').should('be.visible');
-  cy.get('button').contains('Log In').should('be.visible');
+  cy.get('button').contains('Log in').should('be.visible');
 });
 
 Then('Jag vill också kunna gå tillbaka till startsidan via en länk i navbaren', () => {
