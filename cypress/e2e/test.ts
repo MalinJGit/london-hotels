@@ -1,4 +1,4 @@
-import { When, Then, Given, Before } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, Before } from '@badeball/cypress-cucumber-preprocessor';
 
 Before(() => {
   cy.visit('http://localhost:5173/');

@@ -20,7 +20,7 @@ module.exports = defineConfig({
       return config;
     },
     baseUrl: 'http://localhost:5173',
-    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    specPattern: 'cypress/e2e/**/*.{ts,tsx,js}',
   },
 
   component: {
