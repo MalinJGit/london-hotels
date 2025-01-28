@@ -10,7 +10,14 @@ const { defineConfig } = require('cypress');
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      addCucumberPreprocessorPlugin(on, config);
+      on(
+        'file:preprocessor',
+        createBundler({
+          plugins: [createEsbuildPlugin(config)],
+        })
+      );
+      return config;
     },
     baseUrl: 'http://localhost:5173',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
@@ -20,6 +27,7 @@ module.exports = defineConfig({
     specPattern: [
       "cypress/component/**/*.cy.{js,jsx,ts,tsx}",
       "cypress/e2e/**/*.feature",
+      "cypress/e2e/**/*.ts",
     ],
     devServer: {
       framework: "react",
