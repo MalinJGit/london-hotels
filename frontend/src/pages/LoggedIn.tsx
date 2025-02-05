@@ -98,8 +98,8 @@ const LoggedIn: React.FC = () => {
     }
   };
 
-  const favoriteHotels = hotels.filter((hotel) => favorites.includes(hotel.id));
-  const otherHotels = hotels.filter((hotel) => !favorites.includes(hotel.id));
+  const favoriteHotels = hotels.filter((hotel) => favorites.includes(hotel.id)).sort((a, b) => a.id - b.id);
+  const otherHotels = hotels.filter((hotel) => !favorites.includes(hotel.id)).sort((a, b) => a.id - b.id);
 
   return (
     <div className="logged-in">
